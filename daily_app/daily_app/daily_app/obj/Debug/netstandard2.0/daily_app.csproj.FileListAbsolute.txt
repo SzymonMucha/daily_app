@@ -1,0 +1,15 @@
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\bin\Debug\netstandard2.0\daily_app.deps.json
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\bin\Debug\netstandard2.0\daily_app.dll
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\bin\Debug\netstandard2.0\ref\daily_app.dll
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\bin\Debug\netstandard2.0\daily_app.pdb
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.csproj.AssemblyReference.cache
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.GeneratedMSBuildEditorConfig.editorconfig
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\App.xaml.g.cs
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.AssemblyInfoInputs.cache
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.AssemblyInfo.cs
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.csproj.CoreCompileInputs.cache
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\XamlC.stamp
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.dll
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\refint\daily_app.dll
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.pdb
