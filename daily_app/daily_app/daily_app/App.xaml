@@ -4,8 +4,20 @@
              x:Class="daily_app.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Style TargetType="Grid">
-                
+            <Style Class="Body" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="#755C80"/>
+            </Style>
+            <Style Class="BtnAdd" TargetType="Button">
+                <Setter Property="BorderColor" Value="#503E57"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="BackgroundColor" Value="#9B79A8"/>
+                <Setter Property="TextColor" Value="#F0EBF2"/>
+            </Style>
+            <Style Class="HabitCard" TargetType="StackLayout">
+                <Setter Property="BorderColor" Value="#503E57"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="BackgroundColor" Value="#9B79A8"/>
+                <Setter Property="TextColor" Value="#F0EBF2"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
