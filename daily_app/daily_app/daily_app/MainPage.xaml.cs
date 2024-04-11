@@ -28,8 +28,8 @@ namespace daily_app
         }
     }
     public class HabitsList { 
-        public DateTime _lastModDate;
-        public List<Habit> _habitsCollection;
+        private DateTime _lastModDate;
+        private List<Habit> _habitsCollection;
 
         private DateTime LastUpdateTimeChange() {
             return _lastModDate = DateTime.MinValue;
@@ -52,6 +52,11 @@ namespace daily_app
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

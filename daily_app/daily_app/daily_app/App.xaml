@@ -14,10 +14,13 @@
                 <Setter Property="TextColor" Value="#F0EBF2"/>
             </Style>
             <Style Class="HabitCard" TargetType="StackLayout">
-                <Setter Property="BorderColor" Value="#503E57"/>
-                <Setter Property="BorderWidth" Value="3"/>
                 <Setter Property="BackgroundColor" Value="#9B79A8"/>
                 <Setter Property="TextColor" Value="#F0EBF2"/>
+            </Style>
+            <Style Class="HabitCardFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="#503E57"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="Padding" Value="3"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
