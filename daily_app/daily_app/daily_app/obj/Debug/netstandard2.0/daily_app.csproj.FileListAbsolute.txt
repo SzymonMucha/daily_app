@@ -13,4 +13,4 @@ D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.
 D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.dll
 D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\refint\daily_app.dll
 D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\daily_app.pdb
-D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\AddHabitPage.xaml.g.cs
+D:\programowanie\daily_app\daily_app\daily_app\daily_app\obj\Debug\netstandard2.0\Views\AddHabitPage.xaml.g.cs

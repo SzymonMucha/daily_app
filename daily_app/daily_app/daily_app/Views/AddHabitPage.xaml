@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="daily_app.Views.AddHabitPage">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#755C80">
+            <StackLayout WidthRequest="300" HorizontalOptions="Center" Margin="0,30,0,0">
+                <Label Text="Habit name:" TextColor="#F0EBF2"/>
+                <Entry x:Name="habitName" TextColor="#F0EBF2" MaxLength="50" ClearButtonVisibility="WhileEditing" Keyboard="Chat"/>
+            </StackLayout>
+            <StackLayout WidthRequest="300" HorizontalOptions="Center" Margin="0,30,0,0">
+                <Label Text="How many days have you been doing this?:" TextColor="#F0EBF2"/>
+                <Entry x:Name="habitStreak"  TextColor="#F0EBF2" ClearButtonVisibility="WhileEditing" Keyboard="Numeric"/>
+            </StackLayout>
+            <Button Clicked="Button_Clicked" StyleClass="BtnAdd" Text="+" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="100" WidthRequest="75" HeightRequest="75" FontSize="Large"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

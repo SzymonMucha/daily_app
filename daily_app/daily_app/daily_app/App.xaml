@@ -15,10 +15,12 @@
             </Style>
             <Style Class="HabitCard" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="#9B79A8"/>
+                <Setter Property="Padding" Value="15"/>
             </Style>
             <Style Class="HabitCardFrame" TargetType="Frame">
                 <Setter Property="OutlineColor" Value="#503E57"/>
                 <Setter Property="Padding" Value="3"/>
+                <Setter Property="Maring" Value="10"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

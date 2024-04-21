@@ -8,8 +8,8 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <ScrollView Grid.Row="0">
-
+        <ScrollView x:Name="cardsOutput" Grid.Row="0">
+            
         </ScrollView>
         <Button Clicked="Button_Clicked" StyleClass="BtnAdd" Text="+" Grid.Row="0" VerticalOptions="End" HorizontalOptions="End" CornerRadius="100" WidthRequest="75" HeightRequest="75" FontSize="Large" Margin="0, 0, 20, 20"></Button>
     </Grid>
