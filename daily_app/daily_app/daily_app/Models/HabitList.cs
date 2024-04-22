@@ -16,7 +16,7 @@ namespace daily_app.Models
         }
         public void CreateHabit(string description, ulong streak)
         {
-            Habit h = new Habit() { HabitDescription = description, HabitStreak = streak, HabitLastModDate = new DateTime(0000, 0, 0, 0, 0, 0) };
+            Habit h = new Habit() { HabitDescription = description, HabitStreak = streak, HabitLastModDate = LastUpdateTimeChange() };
             AddHabit(h);
         }
         public void ExportToJSON()
@@ -34,8 +34,7 @@ namespace daily_app.Models
             return LastModDate = DateTime.MinValue;
         }
         private void AddHabit(Habit h)
-        {
-            h.HabitLastModDate = LastUpdateTimeChange();
+        { 
             HabitsCollection.Add(h);
         }
 

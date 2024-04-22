@@ -20,7 +20,7 @@
             <Style Class="HabitCardFrame" TargetType="Frame">
                 <Setter Property="OutlineColor" Value="#503E57"/>
                 <Setter Property="Padding" Value="3"/>
-                <Setter Property="Maring" Value="10"/>
+                <Setter Property="Margin" Value="10"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

@@ -19,13 +19,17 @@ namespace daily_app.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            if (habitName.Text != "" && habitStreak.Text != "")
-            { 
+            if (habitName.Text != "" && habitStreak.Text != "" && habitName.Text != null && habitStreak.Text != null)
+            {
                 string hName = habitName.Text;
                 ulong hStreak = ulong.Parse(habitStreak.Text);
 
                 ((App)App.Current).HabitsList.CreateHabit(hName, hStreak);
-                Navigation.PopAsync();
+                Navigation.PopModalAsync();
+            }
+            else
+            {
+                DisplayAlert("Alert", "Some of the fields are empty, fix it!", "OK");
             }
         }
     }
