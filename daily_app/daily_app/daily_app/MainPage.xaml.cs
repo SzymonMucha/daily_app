@@ -1,4 +1,5 @@
-﻿using daily_app.Views;
+﻿using daily_app.Models;
+using daily_app.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,8 +7,10 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
 
 namespace daily_app
 {
@@ -18,29 +21,40 @@ namespace daily_app
         {
             InitializeComponent();
         }
+        public void RefreshCommand() {
+            OnAppearing();
+            refreshView.IsRefreshing = false;
+        }
         protected override void OnAppearing()
         {
+            refreshView.Command = new Command(RefreshCommand);
             StackLayout childrenList = new StackLayout();
+            bool deletedHabitStreak = false;
             int i = 0;
 
             foreach (var item in ((App)App.Current).HabitsList.HabitsCollection)
             {
+                if (DateTime.Now.Day - item.HabitLastModDate.Day > 3) 
+                {
+                    item.HabitStreak = 0;
+                    deletedHabitStreak = true;
+                }
                 StackLayout childStack = new StackLayout
                 {
                     StyleClass = new[] { "HabitCard" },
                     Orientation = StackOrientation.Vertical
                 };
 
-                childStack.Children.Add(new Label {
+                childStack.Children.Add(new Xamarin.Forms.Label {
                     Text = item.HabitDescription,
-                    FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+                    FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Xamarin.Forms.Label)),
                     TextColor = Color.FromHex("#F0EBF2"),
                     HorizontalOptions = LayoutOptions.Fill
                 }); ;
-                childStack.Children.Add(new Label { 
+                childStack.Children.Add(new Xamarin.Forms.Label { 
                     Text = "Daily streak: " + item.HabitStreak.ToString(), 
                     WidthRequest = 200,
-                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Xamarin.Forms.Label)),
                     TextColor = Color.FromHex("#F0EBF2"),
                     HorizontalOptions = LayoutOptions.Start 
                 });
@@ -51,18 +65,20 @@ namespace daily_app
                     VerticalOptions = LayoutOptions.End,
                     Orientation = StackOrientation.Horizontal
                 };
-
-                buttonsStackLayout.Children.Add(new Button { 
-                    Text = "+", 
+                Button btnadd = new Button
+                {
+                    Text = "+",
                     HorizontalOptions = LayoutOptions.Start,
                     CornerRadius = 100,
                     WidthRequest = 40,
                     HeightRequest = 40,
                     FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)),
-                    StyleClass = new[] {"BtnAdd"},
+                    StyleClass = new[] { "BtnAdd" },
+                    StyleId = i.ToString(),
                     VerticalOptions = LayoutOptions.End
-                }.Clicked += StreakIncrement);
-                buttonsStackLayout.Children.Add(new Button
+                };
+                btnadd.Clicked += StreakIncrement;
+                Button btndel = new Button
                 {
                     Text = "x",
                     HorizontalOptions = LayoutOptions.End,
@@ -71,8 +87,13 @@ namespace daily_app
                     HeightRequest = 40,
                     FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Button)),
                     StyleClass = new[] { "BtnAdd" },
+                    StyleId = i.ToString(),
                     VerticalOptions = LayoutOptions.End
-                });
+                };
+                btndel.Clicked += HabitDelete;
+
+                buttonsStackLayout.Children.Add(btnadd);
+                buttonsStackLayout.Children.Add(btndel);
 
                 childStack.Children.Add(buttonsStackLayout);
 
@@ -82,11 +103,19 @@ namespace daily_app
                     Content = childStack
                 };
 
-
                 childrenList.Children.Add(newCard);
                 i++;
             }
             cardsOutput.Content = childrenList;
+
+            if (deletedHabitStreak)
+            {
+                DisplayAlert(
+                    "Alert",
+                    "One or more of your habit streaks have been deleted due to your last activity associated with them was older than 3 days - don't let that happen again!",
+                    "OK"
+                );
+            }
         }
         private void Button_Clicked(object sender, EventArgs e)
         {
@@ -108,9 +137,37 @@ namespace daily_app
                 button.IsEnabled = true;
             }*/
         }
-        private void StreakIncrement(object sender, EventArgs e)
-        {
+        private async void StreakIncrement(object sender, EventArgs e)
+        { 
+            if (sender is Button button)
+            {
+                Habit h = ((App)App.Current).HabitsList.HabitsCollection.ElementAt(int.Parse(button.StyleId));
+
+                if (h.HabitLastModDate.Day < DateTime.Now.Day)
+                {
+                    if (await DisplayAlert("Warning", "You can increase your streak only once a day - proceed?", "Yes", "No"))
+                    {
+                        h.HabitStreak++;
+                        h.HabitLastModDate = DateTime.Now;
+                        ((App)App.Current).HabitsList.LastModDate = h.HabitLastModDate;
+                        ((App)App.Current).HabitsList.ExportToJSON();
+                        OnAppearing();
+                    }
+                }
+            }
             
+        }
+        private async void HabitDelete(object sender, EventArgs e)
+        {
+            if (await DisplayAlert("Warning", "You are going to delete this habit - proceed?", "Yes", "No"))
+            {
+                if (sender is Button button)
+                {
+                    ((App)App.Current).HabitsList.HabitsCollection.RemoveAt(int.Parse(button.StyleId));
+                    ((App)App.Current).HabitsList.ExportToJSON();
+                    OnAppearing();
+                }
+            }
         }
     }
 }

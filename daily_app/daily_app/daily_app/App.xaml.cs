@@ -21,9 +21,12 @@ namespace daily_app
         {
             try
             {
-                string fileName = "HabitsListSaveFile.json";
+                string fileName = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "HabitsListSaveFile.json");
                 FileStream openStream = File.OpenRead(fileName);
                 HabitsList = JsonSerializer.Deserialize<HabitsList>(openStream);
+                openStream.Close(); 
             }
             catch
             {
@@ -33,7 +36,7 @@ namespace daily_app
         }
 
         protected override void OnSleep()
-        {
+        { 
         }
 
         protected override void OnResume()

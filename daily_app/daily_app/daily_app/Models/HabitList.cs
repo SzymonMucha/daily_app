@@ -16,25 +16,29 @@ namespace daily_app.Models
         }
         public void CreateHabit(string description, ulong streak)
         {
-            Habit h = new Habit() { HabitDescription = description, HabitStreak = streak, HabitLastModDate = LastUpdateTimeChange() };
+            Habit h = new Habit() { HabitDescription = description, HabitStreak = streak, HabitLastModDate = LastUpdateTimeChange().AddDays(-1) };
             AddHabit(h);
         }
         public void ExportToJSON()
         {
-            Encoding unicode = Encoding.Unicode;
+            /*Encoding unicode = Encoding.Unicode;
 
-            string fileName = "HabitsListSaveFile.json";
+            string fileName = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
+                "HabitsListSaveFile.json");
             string jsonString = JsonSerializer.Serialize(this);
             FileStream openStream = File.OpenWrite(fileName);
             openStream.Write(unicode.GetBytes(jsonString), 0, unicode.GetByteCount(jsonString));
+            openStream.Close();*/
         }
 
         private DateTime LastUpdateTimeChange()
         {
-            return LastModDate = DateTime.MinValue;
+            return LastModDate = DateTime.Now;
         }
         private void AddHabit(Habit h)
-        { 
+        {
+            ((App)App.Current).HabitsList.ExportToJSON();
             HabitsCollection.Add(h);
         }
 
