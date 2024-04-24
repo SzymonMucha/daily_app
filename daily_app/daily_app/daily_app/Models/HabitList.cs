@@ -21,15 +21,15 @@ namespace daily_app.Models
         }
         public void ExportToJSON()
         {
-            /*Encoding unicode = Encoding.Unicode;
+            Encoding unicode = Encoding.Unicode;
 
             string fileName = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
                 "HabitsListSaveFile.json");
             string jsonString = JsonSerializer.Serialize(this);
-            FileStream openStream = File.OpenWrite(fileName);
+            FileStream openStream = File.Open(fileName, FileMode.Create, FileAccess.Write, FileShare.Read);
             openStream.Write(unicode.GetBytes(jsonString), 0, unicode.GetByteCount(jsonString));
-            openStream.Close();*/
+            openStream.Close();
         }
 
         private DateTime LastUpdateTimeChange()
