@@ -12,6 +12,7 @@ namespace daily_app
     public partial class App : Application
     {
         public HabitsList HabitsList { get; set; }
+        public User user { get; set; }
         public App()
         {
             InitializeComponent();
@@ -19,20 +20,15 @@ namespace daily_app
         }
         protected override void OnStart()
         {
-            try
-            {
-                string fileName = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "HabitsListSaveFile.json");
-                FileStream openStream = File.OpenRead(fileName);
-                HabitsList = JsonSerializer.Deserialize<HabitsList>(openStream);
-                openStream.Close(); 
+            try {
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "HabitsListSaveFile.json");
+
+                string jsonData = File.ReadAllText(filePath);
+                HabitsList = JsonSerializer.Deserialize<HabitsList>(jsonData);
             }
-            catch
-            {
+            catch {
                 HabitsList = new HabitsList();
             }
-            
         }
 
         protected override void OnSleep()

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="daily_app.Views.loginPage">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#755C80">
+            <StackLayout WidthRequest="300" HorizontalOptions="Center" Margin="0,30,0,0">
+                <Label Text="Login:" TextColor="#F0EBF2"/>
+                <Entry x:Name="login" TextColor="#F0EBF2" MaxLength="50" ClearButtonVisibility="WhileEditing" Keyboard="Default"/>
+            </StackLayout>
+            <StackLayout WidthRequest="300" HorizontalOptions="Center" Margin="0,30,0,0">
+                <Label Text="Password:" TextColor="#F0EBF2"/>
+                <Entry x:Name="pass" IsPassword="true" TextColor="#F0EBF2" MaxLength="50" ClearButtonVisibility="WhileEditing" Keyboard="Default"/>
+            </StackLayout>
+            <StackLayout WidthRequest="300" HorizontalOptions="Center" Margin="0,30,0,0">
+                <Label Text="Don't have an account? Sign up!" TextColor="#F0EBF2">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NewAccountCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <Button Clicked="Button_Clicked" StyleClass="BtnAdd" Text="Log in" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="100" WidthRequest="225" HeightRequest="75" FontSize="Large"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

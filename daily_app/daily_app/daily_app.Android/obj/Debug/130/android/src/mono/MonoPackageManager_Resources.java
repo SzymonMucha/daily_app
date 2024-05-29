@@ -3,9 +3,22 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "daily_app.Android.dll" comes first in this list. */
 		"daily_app.Android.dll",
+		"BouncyCastle.Cryptography.dll",
 		"daily_app.dll",
 		"FormsViewGroup.dll",
+		"Google.Protobuf.dll",
+		"K4os.Compression.LZ4.dll",
+		"K4os.Compression.LZ4.Streams.dll",
+		"K4os.Hash.xxHash.dll",
 		"Microsoft.Bcl.AsyncInterfaces.dll",
+		"MySql.Data.dll",
+		"System.Configuration.ConfigurationManager.dll",
+		"System.Diagnostics.DiagnosticSource.dll",
+		"System.IO.Pipelines.dll",
+		"System.Runtime.Loader.dll",
+		"System.Security.AccessControl.dll",
+		"System.Security.Permissions.dll",
+		"System.Security.Principal.Windows.dll",
 		"System.Text.Encodings.Web.dll",
 		"System.Text.Json.dll",
 		"Xamarin.AndroidX.Activity.dll",
@@ -67,6 +80,7 @@ public class MonoPackageManager_Resources {
 		"Xamarin.Forms.Xaml.dll",
 		"Xamarin.Google.Android.Material.dll",
 		"Xamarin.Google.Guava.ListenableFuture.dll",
+		"ZstdSharp.dll",
 	};
 	public static String[] Dependencies = new String[]{
 	};

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.X509;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -21,15 +23,14 @@ namespace daily_app.Models
         }
         public void ExportToJSON()
         {
-            Encoding unicode = Encoding.Unicode;
-
-            string fileName = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), 
-                "HabitsListSaveFile.json");
             string jsonString = JsonSerializer.Serialize(this);
-            FileStream openStream = File.Open(fileName, FileMode.Create, FileAccess.Write, FileShare.Read);
-            openStream.Write(unicode.GetBytes(jsonString), 0, unicode.GetByteCount(jsonString));
-            openStream.Close();
+            
+            //tests
+            Debug.WriteLine("\n--------------JSON---PRINT--------------\n\n" + jsonString);
+            Debug.WriteLine("\n------------HABITS---COUNTER------------\n\n" + ((App)App.Current).HabitsList.HabitsCollection.Count);
+
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "HabitsListSaveFile.json");
+            File.WriteAllText(filePath, jsonString);
         }
 
         private DateTime LastUpdateTimeChange()
@@ -38,8 +39,8 @@ namespace daily_app.Models
         }
         private void AddHabit(Habit h)
         {
-            ((App)App.Current).HabitsList.ExportToJSON();
             HabitsCollection.Add(h);
+            ((App)App.Current).HabitsList.ExportToJSON();
         }
 
 

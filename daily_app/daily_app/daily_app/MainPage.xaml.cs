@@ -4,8 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -25,16 +28,76 @@ namespace daily_app
             OnAppearing();
             refreshView.IsRefreshing = false;
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             refreshView.Command = new Command(RefreshCommand);
             StackLayout childrenList = new StackLayout();
+
+            StackLayout greeting = new StackLayout();
+            greeting.Margin = 20;
+            greeting.Children.Add(new Xamarin.Forms.Label
+            {
+                Text = "Hi there!",
+                FontSize = Device.GetNamedSize(NamedSize.Title, typeof(Xamarin.Forms.Label)),
+                TextColor = Color.FromHex("#F0EBF2"),
+                HorizontalOptions = LayoutOptions.Fill
+            });
+            greeting.Children.Add(new Xamarin.Forms.Label
+            {
+                Text = "Today is " + DateTime.Now.Day + "." 
+                + (DateTime.Now.Month < 10 ? "0" + DateTime.Now.Month.ToString() : DateTime.Now.Month.ToString()) + "." 
+                + DateTime.Now.Year,
+                FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Xamarin.Forms.Label)),
+                TextColor = Color.FromHex("#F0EBF2"),
+                HorizontalOptions = LayoutOptions.Fill
+            });
+            /*
+            Quote q = new Quote();
+
+            HttpClient client = new HttpClient();
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            try
+            {
+                cancellationTokenSource.CancelAfter(TimeSpan.FromSeconds(5));
+
+                //API from ZenQuotes
+                HttpResponseMessage response = await client.GetAsync("https://zenquotes.io/api/random", cancellationTokenSource.Token);
+                response.EnsureSuccessStatusCode();
+                string jsonData = await response.Content.ReadAsStringAsync();
+                q = JsonSerializer.Deserialize<Quote>(jsonData);
+            }
+            finally
+            {
+                cancellationTokenSource.Dispose();
+            }
+            //test
+            if (q.q != null && q.q != "")
+            {
+                greeting.Children.Add(new Xamarin.Forms.Label
+                {
+                    Text = "Your quote: \"" + q.q + "\"",
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Xamarin.Forms.Label)),
+                    TextColor = Color.FromHex("#F0EBF2"),
+                    HorizontalOptions = LayoutOptions.Fill
+                });
+                greeting.Children.Add(new Xamarin.Forms.Label
+                {
+                    Text = "~" + q.a,
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Xamarin.Forms.Label)),
+                    TextColor = Color.FromHex("#F0EBF2"),
+                    HorizontalOptions = LayoutOptions.Fill
+                });
+            }
+            */
+            childrenList.Children.Add(greeting);
+
             bool deletedHabitStreak = false;
             int i = 0;
 
             foreach (var item in ((App)App.Current).HabitsList.HabitsCollection)
             {
-                if (DateTime.Now.Day - item.HabitLastModDate.Day > 3) 
+                if ((DateTime.Now - item.HabitLastModDate).Days >= 3) 
                 {
                     item.HabitStreak = 0;
                     deletedHabitStreak = true;
@@ -50,13 +113,21 @@ namespace daily_app
                     FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Xamarin.Forms.Label)),
                     TextColor = Color.FromHex("#F0EBF2"),
                     HorizontalOptions = LayoutOptions.Fill
-                }); ;
+                });
                 childStack.Children.Add(new Xamarin.Forms.Label { 
                     Text = "Daily streak: " + item.HabitStreak.ToString(), 
                     WidthRequest = 200,
                     FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Xamarin.Forms.Label)),
                     TextColor = Color.FromHex("#F0EBF2"),
                     HorizontalOptions = LayoutOptions.Start 
+                });
+                childStack.Children.Add(new Xamarin.Forms.Label
+                {
+                    Text = "Your streak will be ereased in " + (item.HabitLastModDate.AddDays(4) - DateTime.Now).Days.ToString() + " days.",
+                    WidthRequest = 200,
+                    FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Xamarin.Forms.Label)),
+                    TextColor = Color.FromHex("#F0EBF2"),
+                    HorizontalOptions = LayoutOptions.Start
                 });
 
                 StackLayout buttonsStackLayout = new StackLayout { 
